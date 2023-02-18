@@ -2,6 +2,8 @@
 import { useForm } from 'react-hook-form';
 import TextInput from '@/components/shared/molecules/form/TextInput';
 import { useSupabase } from '@/components/features/supabase/supabase-provider';
+import ButtonPrimary from '@/components/shared/atoms/buttons/ButtonPrimary';
+import style from './login.module.scss';
 
 export interface LoginCredentials {
   email: string;
@@ -53,7 +55,8 @@ const LoginForm = () => {
           },
         }}
       />
-      <button type={'submit'}>Submit</button>
+
+      <ButtonPrimary title={"Let's go!"} type={'submit'} size={'large'} />
     </form>
   );
 };

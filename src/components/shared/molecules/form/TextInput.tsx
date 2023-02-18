@@ -1,4 +1,5 @@
 import { useController } from 'react-hook-form';
+import style from './form.module.scss';
 
 type Props = {
   name: string;
@@ -28,12 +29,17 @@ export default function TextInput({
   } = useController({ name, control, rules, defaultValue });
 
   return (
-    <div>
-      {label && <label>{label}</label>}
+    <div className={`${style.formElement} ${style.textElement}`}>
+      {label && <label className={style.label}>{label}</label>}
       <div>
-        <input ref={ref} type={inputType} placeholder={placeholder} {...inputProps} />
+        <input
+          className={`${style.input} ${style.textInput}`}
+          ref={ref}
+          type={inputType}
+          placeholder={placeholder}
+          {...inputProps}
+        />
       </div>
-      {invalid && <div>{errors[name].message}</div>}
     </div>
   );
 }
