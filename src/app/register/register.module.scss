@@ -1,0 +1,16 @@
+.registerPage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.registerFormWrapper{
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+
+  button{
+    width: 100%;
+  }
+
+}

@@ -39,6 +39,8 @@ export default function TextInput({
           placeholder={placeholder}
           {...inputProps}
         />
+        {/* todo: fix typescript */}
+        {errors && errors[name] && <p className={style.error}>{(errors[name] as any).message}</p>}
       </div>
     </div>
   );

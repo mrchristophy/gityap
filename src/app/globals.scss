@@ -3,3 +3,14 @@
 html{
     color: $black;
 }
+
+a{
+    color: $purple;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+
+    &:hover{
+        color: $purple-darker;
+    }
+}

@@ -23,7 +23,7 @@ const LoginForm = () => {
   } = useForm<LoginCredentials>();
 
   const onSubmit = async ({ email, password }: LoginCredentials) => {
-    const response = await supabase.auth.signUp({
+    const response = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
