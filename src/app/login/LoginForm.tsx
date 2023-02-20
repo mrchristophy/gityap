@@ -4,6 +4,9 @@ import TextInput from '@/components/shared/molecules/form/TextInput';
 import { useSupabase } from '@/components/features/supabase/supabase-provider';
 import ButtonPrimary from '@/components/shared/atoms/buttons/ButtonPrimary';
 import style from './login.module.scss';
+import { useState } from 'react';
+import Error from '@/components/shared/atoms/error/Error';
+import { useRouter } from 'next/navigation';
 
 export interface LoginCredentials {
   email: string;
@@ -12,6 +15,9 @@ export interface LoginCredentials {
 
 const LoginForm = () => {
   const { supabase } = useSupabase();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const router = useRouter();
 
   const {
     control,
@@ -23,12 +29,18 @@ const LoginForm = () => {
   } = useForm<LoginCredentials>();
 
   const onSubmit = async ({ email, password }: LoginCredentials) => {
+    setLoading(true);
     const response = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    console.log(response);
+    if (response.error) {
+      setErrorMsg(response.error.message);
+      setLoading(false);
+    } else {
+      await router.push('/dashboard');
+    }
   };
 
   return (
@@ -56,7 +68,9 @@ const LoginForm = () => {
         }}
       />
 
-      <ButtonPrimary title={"Let's go!"} type={'submit'} size={'large'} />
+      <ButtonPrimary title={"Let's go!"} type={'submit'} size={'large'} loading={loading} />
+
+      {errorMsg !== '' && <Error text={errorMsg} />}
     </form>
   );
 };

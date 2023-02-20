@@ -12,5 +12,13 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
+  if (!session && req.nextUrl.pathname.startsWith('/dashboard')) {
+    // Auth condition not met, redirect to login page.
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.pathname = '/login';
+    redirectUrl.searchParams.set(`destination`, req.nextUrl.pathname);
+    return NextResponse.redirect(redirectUrl);
+  }
+
   return res;
 }

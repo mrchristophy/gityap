@@ -1,3 +1,4 @@
+import 'normalize.css/normalize.css';
 import './globals.scss';
 import 'server-only';
 
@@ -5,6 +6,7 @@ import SupabaseListener from '@/components/features/supabase/supabase-listener';
 import SupabaseProvider from '@/components/features/supabase/supabase-provider';
 import { createClient } from '@/util/supabase-server';
 import { Inter } from '@next/font/google';
+import React from 'react';
 
 export const revalidate = 0;
 
@@ -19,8 +21,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
-  console.log('session 1', session);
 
   return (
     <html lang="en" className={inter.className}>
