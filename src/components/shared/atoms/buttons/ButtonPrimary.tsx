@@ -18,7 +18,7 @@ const ButtonPrimary = ({ title, type, href, onClick, size = 'medium', loading }:
     <>
       {href && (
         <Link className={classes} onClick={onClick} href={href}>
-          title
+          {title}
         </Link>
       )}
       {!href && (

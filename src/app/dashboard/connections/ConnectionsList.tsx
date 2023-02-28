@@ -13,6 +13,10 @@ interface Props {
   serverConnections: ConnectionType[];
 }
 
+const connectGithub = async () => {
+  window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`;
+};
+
 const ConnectionsList = ({ serverConnections }: Props) => {
   const [connections, setConnections] = useState<ConnectionType[]>(serverConnections);
   const { supabase } = useSupabase();
@@ -37,6 +41,8 @@ const ConnectionsList = ({ serverConnections }: Props) => {
           {connection.id} {connection.provider}
         </div>
       ))}
+
+      <a onClick={connectGithub}>Connect a new Github account</a>
     </div>
   );
 };
