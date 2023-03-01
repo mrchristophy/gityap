@@ -1,43 +1,51 @@
-'use client';
+import 'server-only';
+import { createClient } from '@/util/supabase-server';
+import { redirect } from 'next/navigation';
+import { GITHUB_ACCESS_TOKEN_URL, GITHUB_USER_URL } from '@/constants/githubConstants';
 
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { useEffectOnce } from '@/hooks/useEffectOnce';
+const Authorize = async ({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) => {
+  const supabase = createClient();
 
-const Authorize = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const code = searchParams.get('code');
-
-  useEffectOnce(() => {
-    if (code) {
-      getGithubAccessToken().catch((error) => {
-        console.log(error);
-      });
-      console.log(code);
-    }
-
-    return () => {
-      console.log('unmounted');
-    };
+  const tokenRawResponse = await fetch(GITHUB_ACCESS_TOKEN_URL, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      client_id: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      code: searchParams?.code,
+    }),
   });
 
-  const getGithubAccessToken = async () => {
-    const response = await fetch('/api/auth/github', {
-      method: 'POST',
-      body: JSON.stringify({
-        code: code,
-      }),
+  const tokenResponse = await tokenRawResponse.json();
+
+  // Check that user isn't already connected
+
+  const useRawResponse = await fetch(GITHUB_USER_URL, {
+    headers: {
+      Authorization: `token ${tokenResponse.access_token}`,
+    },
+  });
+
+  const userResponse = await useRawResponse.json();
+
+  if (tokenResponse.access_token) {
+    const insertResponse = await supabase.from('connection').insert({
+      provider: 'github',
+      access_token: tokenResponse.access_token,
+      account_id: userResponse.id,
+      account_name: userResponse.login,
     });
 
-    const { accessToken } = await response.json();
+    // Todo: deal with error
+    console.log(insertResponse);
+  }
 
-    return accessToken;
-  };
+  redirect('/dashboard/connections');
 
-  return <div>This is auth</div>;
+  return <div>Authorizing...</div>;
 };
 
 export default Authorize;
