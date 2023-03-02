@@ -13,6 +13,10 @@
   font-size: 16px;
   position: relative;
 
+  &.fullWidth{
+    width: 100%;
+  }
+
   &.large{
     padding: 20px;
     font-size: 18px;

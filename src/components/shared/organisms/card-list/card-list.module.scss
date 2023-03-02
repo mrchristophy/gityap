@@ -1,0 +1,12 @@
+@import "variables";
+
+.cardList{
+  display: flex;
+  margin-bottom: 30px;
+  gap: 30px;
+  flex-wrap: wrap;
+
+  & > div{
+    min-width: 200px;
+  }
+}

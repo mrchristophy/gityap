@@ -9,10 +9,11 @@ interface Props {
   onClick?: () => void;
   size?: 'small' | 'medium' | 'large';
   loading?: boolean;
+  fullWidth?: boolean;
 }
 
-const ButtonPrimary = ({ title, type, href, onClick, size = 'medium', loading }: Props) => {
-  const classes = `${style.buttonPrimary} ${style[size]} ${loading && style.loading}`;
+const ButtonPrimary = ({ title, type, href, onClick, size = 'medium', loading, fullWidth }: Props) => {
+  const classes = `${style.buttonPrimary} ${style[size]} ${loading && style.loading} ${fullWidth && style.fullWidth}`;
 
   return (
     <>

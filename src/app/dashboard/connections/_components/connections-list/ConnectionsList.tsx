@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useSupabase } from '@/components/features/supabase/supabase-provider';
-import Connection from '@/components/shared/molecules/card/connection/Connection';
+import ConnectionCard from '@/app/dashboard/connections/_components/connection-card/ConnectionCard';
 import style from './connections-list.module.scss';
 import ButtonPrimary from '@/components/shared/atoms/buttons/ButtonPrimary';
 import { ConnectionType } from '@/types/ConnectionType';
+import CardList from '@/components/shared/organisms/card-list/CardList';
 
 interface Props {
   serverConnections: ConnectionType[];
@@ -34,11 +35,11 @@ const ConnectionsList = ({ serverConnections }: Props) => {
 
   return (
     <>
-      <div className={style.connectionsList}>
+      <CardList>
         {connections.map((connection) => (
-          <Connection key={connection.id} connection={connection} />
+          <ConnectionCard key={connection.id} connection={connection} />
         ))}
-      </div>
+      </CardList>
 
       <ButtonPrimary onClick={connectGithub} title={'Connect a new Github account'} />
     </>
