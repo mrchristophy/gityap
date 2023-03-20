@@ -6,6 +6,9 @@ interface Props {
 }
 const ColumnItem = ({ item }: Props) => {
   const date = format(parseISO(item.created_at), 'do MMM yyyy HH:mm');
+
+  console.log('item', item);
+
   const typeText = item.type
     .replace('Event', '')
     .replace(/([A-Z])/g, ' $1')
@@ -20,7 +23,13 @@ const ColumnItem = ({ item }: Props) => {
         </div>
       </div>
 
-      {item.payload.commits?.length > 0 && <div className={style.message}>{item.payload.commits[0].message}</div>}
+      {item.payload.commits?.length > 0 &&
+        item.payload.commits.map((commit: any) => (
+          <>
+            <div className={style.message}>{commit.message}</div>
+            <div className={style.author}>{commit.author.name}</div>
+          </>
+        ))}
     </div>
   );
 };
