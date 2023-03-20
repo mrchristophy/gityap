@@ -38,3 +38,26 @@
     transform: translate(0, -50%) scale(60%);
   }
 }
+
+.iconButton{
+  cursor: pointer;
+  border: 1px solid $grey1;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: border-color 0.2s ease-in-out;
+
+  path{
+    transition: fill 0.2s ease-in-out;
+  }
+
+  &:hover{
+    border-color: $purple;
+
+    path{
+      fill: $purple !important;
+    }
+  }
+}

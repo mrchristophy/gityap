@@ -17,7 +17,31 @@
 .tag{
   margin-left: auto;
   position: relative;
+  display: flex;
+  gap: 5px;
 }
 .message{
   font-weight: 500;
+  font-size: 15px;
+}
+
+.branch{
+  font-size: 14px;
+  color: $purple;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.commit{
+  border: 1px solid $grey1;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 3px;
+}
+
+.author{
+  font-size: 14px;
+  margin-top: 3px;
 }

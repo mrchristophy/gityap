@@ -1,18 +1,30 @@
 @import "variables";
 
 .column{
-  background: $grey2;
-  padding: 7px;
   width: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.content{
+  background: $grey2;
+  padding: 0 7px;
+  flex-grow: 1;
   height: calc(100vh - 180px);
   overflow: auto;
 }
 
 .header{
   display: flex;
+  padding: 10px 0 10px 10px;
 
-  button{
+  h4{
+    margin: 0;
+  }
+
+  .actions{
     margin-left: auto;
+    display: flex;
+    gap: 5px;
   }
 
 }

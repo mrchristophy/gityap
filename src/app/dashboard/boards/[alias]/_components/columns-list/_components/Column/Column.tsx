@@ -6,6 +6,7 @@ import Modal from '@/components/shared/organisms/modal/Modal';
 import Title from '@/components/shared/atoms/title/Title';
 import { GITHUB_API_BASE_URL } from '@/constants/githubConstants';
 import ColumnItem from '@/app/dashboard/boards/[alias]/_components/columns-list/_components/Column/_components/ColumnItem';
+import IconButton from '@/components/shared/atoms/buttons/IconButton';
 
 interface Props {
   column: ColumnType;
@@ -41,9 +42,14 @@ const Column = ({ column, deleteColumn }: Props) => {
       <div className={style.column}>
         <div className={style.header}>
           <Title level={4}>{column.repository}</Title>
-          <ButtonPrimary title={'Delete'} onClick={() => setShowDeleteModal(true)} />
+          <div className={style.actions}>
+            <IconButton icon={'settings'} title={'delete'} onClick={() => console.log('todo')} />
+            <IconButton icon={'delete'} title={'delete'} onClick={() => setShowDeleteModal(true)} />
+          </div>
         </div>
-        {activity.length > 0 && activity.map((item) => <ColumnItem key={item.id} item={item} />)}
+        <div className={style.content}>
+          {activity.length > 0 && activity.map((item) => <ColumnItem key={item.id} item={item} />)}
+        </div>
       </div>
 
       <Modal config={{ isOpen: showDeleteModal }} setIsOpenFunction={setShowDeleteModal}>
