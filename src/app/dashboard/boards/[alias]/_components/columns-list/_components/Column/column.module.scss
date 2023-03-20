@@ -4,6 +4,8 @@
   background: $grey2;
   padding: 7px;
   width: 340px;
+  height: calc(100vh - 180px);
+  overflow: auto;
 }
 
 .header{

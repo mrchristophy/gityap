@@ -7,7 +7,13 @@ interface Props {
 const ColumnItem = ({ item }: Props) => {
   const date = format(parseISO(item.created_at), 'do MMM yyyy HH:mm');
 
-  console.log('item', item);
+  let message = null;
+
+  if (item.type === 'CreateEvent') {
+    if (item.payload.ref_type === 'branch') {
+      message = `${item.payload.ref} branch created`;
+    }
+  }
 
   const typeText = item.type
     .replace('Event', '')
@@ -30,6 +36,8 @@ const ColumnItem = ({ item }: Props) => {
             <div className={style.author}>{commit.author.name}</div>
           </>
         ))}
+
+      {message && <div className={style.message}>{message}</div>}
     </div>
   );
 };
