@@ -1,0 +1,16 @@
+@import "variables";
+
+.column{
+  background: $grey2;
+  padding: 7px;
+  width: 340px;
+}
+
+.header{
+  display: flex;
+
+  button{
+    margin-left: auto;
+  }
+
+}

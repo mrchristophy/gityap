@@ -1,0 +1,10 @@
+@import "variables";
+
+.tag{
+  background: $purple;
+  color: $white;
+  font-size: 13px;
+  border-radius: 3px;
+  padding: 3px 6px;
+  display: inline-block;
+}

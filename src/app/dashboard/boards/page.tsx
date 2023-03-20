@@ -5,7 +5,7 @@ import BoardsList from '@/app/dashboard/boards/_components/boards-list/BoardsLis
 
 const Boards = async () => {
   const supabase = createClient();
-  const { data } = await supabase.from('board').select('id,created_at,name, alias');
+  const { data } = await supabase.from('board').select('id,created_at,name,alias');
 
   return (
     <>

@@ -35,7 +35,7 @@ const AddColumnForm = ({ boardId, onSuccess }: Props) => {
       console.log(error);
     }
     if (data) {
-      setConnections(data);
+      setConnections(data as ConnectionType[]);
     }
   };
 

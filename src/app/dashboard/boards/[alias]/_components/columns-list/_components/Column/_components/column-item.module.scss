@@ -1,0 +1,23 @@
+@import "variables";
+
+.item{
+  background: $white;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.header{
+  display: flex;
+  font-size: 13px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.tag{
+  margin-left: auto;
+  position: relative;
+}
+.message{
+  font-weight: 500;
+}

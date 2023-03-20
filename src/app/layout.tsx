@@ -5,7 +5,7 @@ import 'server-only';
 import SupabaseListener from '@/components/features/supabase/supabase-listener';
 import SupabaseProvider from '@/components/features/supabase/supabase-provider';
 import { createClient } from '@/util/supabase-server';
-import { Inter } from '@next/font/google';
+import { Inter } from 'next/font/google';
 import React from 'react';
 
 export const revalidate = 0;
